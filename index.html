@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Question</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">
+            Dynamic Question
+        </h1>
+        <hr />
+        <div class="content">
+            <!--questions tab-->
+            <div id="Questions" class="steps hide-on-results"></div>
+            <!--questions tab-->
+
+            <!--finish product tab-->
+            <div class="show-on-results">
+                <div class="result" id="Result">
+
+                </div>
+            </div>
+            <!--finish product tab-->
+        </div>
+        <div class="buttons">
+            <div class="hide-on-results">
+                <div class="step-buttons">
+                    <button class="prev-button btn step-buttons--left" id="Prev">
+                        Back
+                    </button>
+
+                    <div class="step-bar-container step-buttons--center">
+                        <div class="step-bar" id="StepBar"></div>
+                    </div>
+
+                    <button class="next-button btn step-buttons--right" id="Next">
+                        Continue
+                    </button>
+                    <button class="next-button btn step-buttons--right" id="Finish">
+                        Finish
+                    </button>
+                </div>
+            </div>
+            <div class="show-on-results">
+                <div class="restart-button--container">
+                    <button class="restart-button btn" id="Restart">
+                        Restart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--#region templates-->
+    <script type="text/template" id="_question">
+        <div class="data-step data-step-{{id}}" data-step="{{id}}">
+            <div class="questions">
+                <span>
+                    {{title}}
+                </span>
+                <h2 class="text-center">
+                    {{question}}
+                </h2>
+            </div>
+            <div class="answers">
+                {{list}}
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="_questionList">
+        {{items}}
+    </script>
+    <script type="text/template" id="_questionListItem">
+        <div class="answer">
+            <input class="cb" type="radio" name="q{{index}}" value="{{title}}" data-id="{{id}}" id="q{{index}}-{{id}}" data-skip-to="{{skipTo}}" />
+            <label for="q{{index}}-{{id}}" class="answer--label">
+                <span>
+                    {{title}}
+                </span>
+                <picture>
+                    <img src="{{image_normal}}" alt="{{image_alt_text}}" loading="lazy" />
+                </picture>
+            </label>
+        </div>
+    </script>
+    <script type="text/template" id="_result">
+        <div class="result--image--container">
+            <picture>
+                <img src="{{image_normal}}" alt="{{image_alt_text}}" loading="lazy" class="result--image" />
+            </picture>
+        </div>
+        <div class="result--texts">
+            <h3 class="result--title">
+                {{title}}
+            </h3>
+            {{list}}
+        </div>
+    </script>
+    <script type="text/template" id="_resultList">
+        <ul class="result--list">
+            {{items}}
+        </ul>
+    </script>
+    <script type="text/template" id="_resultListItem">
+        <li class="result--list--item">
+            {{title}}
+        </li>
+    </script>
+
+    <script type="text/template" id="_stepBarItem">
+        <span class="step-bar--item data-step-{{index}} {{active_class}}"></span>
+    </script>
+    <!--#endregion templates-->
+
+    <script>
+        const config = {
+            dataUrl: 'assets/files/questions.json'
+        };
+    </script>
+    <script src="assets/js/classes/AJAX.js"></script>
+    <script src="assets/js/classes/HTMLTemplate.js"></script>
+    <script src="assets/js/classes/DynamicQuestion.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
